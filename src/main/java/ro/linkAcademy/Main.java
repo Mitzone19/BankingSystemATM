@@ -1,15 +1,17 @@
-package ro.scoalainformala;
+package ro.linkAcademy;
 
 
+import java.sql.*;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
+
         ArrayList<Person> listaPersoane = new ArrayList<>();
         ArrayList<ContBancar> listaConturi = new ArrayList<>();
-        HashMap<Person,ArrayList> totalConturiPersoane = new HashMap<>();
+        HashMap<Person,ArrayList<ContBancar>> totalConturiPersoane = new HashMap<>();
 
 
         //LOGIN SEQUENCE
@@ -74,26 +76,32 @@ public class Main {
                             String cnp = sc.nextLine();
                             System.out.println("Introdu parola contului:");
                             String parola1 = sc.nextLine();
+
                             listaPersoane.add(new Person(nume,prenume,cnp));
                             listaUseri.put(cnp,parola1);    //ADAUGA CNP SI PAROLA IN SECVENTA DE LOGIN
                             System.out.println("Ai inregistrat urmatoarea persoana: "+nume+" "+prenume+" (CNP: "+cnp+")");
                             break;
-                        case 2: int counter=1;
+
+                        case 2:
+                            int counter=1;
+
                             if(!listaPersoane.isEmpty()){
-                                for(Person x:listaPersoane){
-                                    System.out.println(counter+". "+x);
+                                for(Person person:listaPersoane){
+                                    System.out.println(counter+". "+person);
                                     counter++;
                                 }
                             }else{
                                 System.out.println("Lista este goala!");
                             }
                             break;
+
                         case 3:
                             Random x=new Random();
                             System.out.println("Introdu balanta:");
                             int balanta = Integer.valueOf(sc.nextLine());
                             System.out.println("Introdu tipul de cont(debit/credit/cumparaturi)");
                             String tipCont=sc.nextLine();
+
                             if(tipCont.toLowerCase().equals("debit") ||
                                     tipCont.toLowerCase().equals("credit") ||
                                     tipCont.toLowerCase().equals("cumparaturi")){
@@ -102,38 +110,44 @@ public class Main {
                                 System.out.println("Tipul de cont ales nu este valid!");
                             }
                             break;
-                        case 4: int counter2=1;
+
+                        case 4:
+                            int counter2=1;
+
                             if(!listaConturi.isEmpty()){
-                                for(ContBancar y:listaConturi){
-                                    System.out.println(counter2+". "+y);
+                                for(ContBancar cont:listaConturi){
+                                    System.out.println(counter2+". "+cont);
                                 }
                             }else {
                                 System.out.println("Nu este inregistrat nici un cont!");
                             }
                             break;
+
                         case 5:
                             int counter3=0;
                             System.out.println("Introdu IBAN-ul contului vizat:");
-                            String ibanVizat=sc.nextLine();
+                            String iban=sc.nextLine();
                             System.out.println("Introdu cnp-ul persoanei vizate:");
-                            String cnpVizat=sc.nextLine();
-                            for(ContBancar z: listaConturi){
-                                if(z.getNumarCont().equals(ibanVizat)){
-                                    for(Person f:listaPersoane){
-                                        if(f.getCNP().equals(cnpVizat)){
-                                            //PANA AICI IDENTIFICA IBAN SI PERSOANA VIZATA
+                            String cnpPersoana=sc.nextLine();
 
-                                            if(totalConturiPersoane.get(f) == null) {          //DACA PERSOANA NU ARE O LISTA DE CONTURI ASOCIATA, SE CREEAZA UNA
-                                                totalConturiPersoane.put(f, new ArrayList<>()); // SE ASOCIAZA PERSOANEI SI I SE ASOCIAZA SI CONTUL VIZAT
-                                                for (Person w : totalConturiPersoane.keySet()) {
-                                                    if (!totalConturiPersoane.get(w).contains(z)) {
-                                                        totalConturiPersoane.get(w).add(z);
+                            for(ContBancar cont: listaConturi){
+                                if(cont.getNumarCont().equals(iban)){
+                                    for(Person person:listaPersoane){
+                                        if(person.getCNP().equals(cnpPersoana)){
+                                            //PANA AICI IDENTIFICA IBAN DIN LISTA CONTURI SI PERSOANA VIZATA DIN LISTA PERSOANE
+
+                                            if(totalConturiPersoane.get(person) == null) {   //DACA PERSOANA NU ARE O LISTA DE CONTURI ASOCIATA, SE CREEAZA UNA
+                                                totalConturiPersoane.put(person, new ArrayList<>()); // SE ASOCIAZA PERSOANEI SI I SE ASOCIAZA SI CONTUL VIZAT
+                                                for (Person person1 : totalConturiPersoane.keySet()) {
+                                                    if (!totalConturiPersoane.get(person1).contains(cont)) {
+                                                        totalConturiPersoane.get(person1).add(cont);
                                                     }
                                                 }
                                             }else{
-                                                for (Person w : totalConturiPersoane.keySet()) { //DACA PERSOANA ARE DEJA O LISTA ASOCIATA, SE ADAUGA DOAR CONTUL VIZAT
-                                                    if (!totalConturiPersoane.get(w).contains(z)) {
-                                                        totalConturiPersoane.get(w).add(z);
+                                                //DACA PERSOANA ARE DEJA O LISTA ASOCIATA, SE ADAUGA DOAR CONTUL VIZAT
+                                                for (Person w : totalConturiPersoane.keySet()) {
+                                                    if (!totalConturiPersoane.get(w).contains(cont)) {
+                                                        totalConturiPersoane.get(w).add(cont);
                                                     }
                                                 }
                                             }
@@ -142,45 +156,54 @@ public class Main {
                                 }
                             }
                             break;
-                        case 6: for(Person xx: totalConturiPersoane.keySet()){
-                            System.out.println(xx.getNume()+" "+xx.getPrenume()+" "+xx.getCNP()+" are "+totalConturiPersoane.get(xx));
-                        }
+
+                        case 6:
+                            for(Person person: totalConturiPersoane.keySet()){
+                                System.out.println(person.getNume()+" "+person.getPrenume()+" "+person.getCNP()+" are "+totalConturiPersoane.get(person));
+                            }
                             break;
+
                         case 7:
                             System.out.println("Introdu iban-ul contului principal:");
-                            String contDonator=sc.nextLine();
+                            String contPrincipal=sc.nextLine();
                             System.out.println("Introdu iban-ul contului destinatar:");
                             String contDestinatar=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru transfer:");
                             int sumaTransfer=Integer.valueOf(sc.nextLine());
-                            for(ContBancar xxx:listaConturi){
-                                if(xxx.getNumarCont().equals(contDonator)){
-                                    for(ContBancar yyy:listaConturi){
-                                        if(yyy.getNumarCont().equals(contDestinatar)){
-                                            xxx.transfer(yyy,sumaTransfer);
+
+                            for(ContBancar cont:listaConturi){
+                                if(cont.getNumarCont().equals(contPrincipal)){
+                                    for(ContBancar cont1:listaConturi){
+                                        if(cont1.getNumarCont().equals(contDestinatar)){
+                                            cont.transfer(cont1,sumaTransfer);
                                         }
                                     }
                                 }
                             }
                             break;
+
                         case 8:
                             System.out.println("Introdu IBAN-ul contului in care depui bani:");
                             String contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru alimentare:");
                             int sumaAlimentare=Integer.valueOf(sc.nextLine());
-                            for(ContBancar xxx:listaConturi){
-                                if(xxx.getNumarCont().equals(contVizat)){
-                                    xxx.depunere(sumaAlimentare);
+
+                            for(ContBancar cont:listaConturi){
+                                if(cont.getNumarCont().equals(contVizat)){
+                                    cont.depunere(sumaAlimentare);
                                 }
                             }
                             break;
-                        case 9: System.out.println("Introdu IBAN-ul contului din care retragi bani:");
-                            String contVizat1=sc.nextLine();
+
+                        case 9:
+                            System.out.println("Introdu IBAN-ul contului din care retragi bani:");
+                            contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru retragere:");
                             int sumaretragere=Integer.valueOf(sc.nextLine());
-                            for(ContBancar xxx:listaConturi){
-                                if(xxx.getNumarCont().equals(contVizat1)){
-                                    xxx.retragere(sumaretragere);
+
+                            for(ContBancar cont:listaConturi){
+                                if(cont.getNumarCont().equals(contVizat)){
+                                    cont.retragere(sumaretragere);
                                 }
                             }
                             break;
@@ -208,6 +231,7 @@ public class Main {
                     switch (optiune) {
                         case 1:
                             System.out.println("Datele tale personale:");
+
                             for (Person person : listaPersoane) {
                                 if (person.getCNP().equals(user)) {
                                     System.out.println(person + " parola: " + listaUseri.get(user));
@@ -215,24 +239,79 @@ public class Main {
                                 }
                             }
                             break;
+
                         case 2:
-                            // View all accounts associated with the user
                             System.out.println("Lista conturilor tale:");
+
                             for (Person person : totalConturiPersoane.keySet()) {
                                 if (person.getCNP().equals(user)) {
                                     System.out.println(totalConturiPersoane.get(person));
                                 }
                             }
                             break;
+
                         case 3:
+                            System.out.println("Introdu IBAN-ul contului din care transferi banii:");
+                            String iban1=sc.nextLine();
+                            System.out.println("Introdu IBAN-ul vizat pentru transfer:");
+                            String iban2=sc.nextLine();
+                            System.out.println("Introdu suma dorita pentru transfer:");
+                            int suma =Integer.valueOf(sc.nextLine());
+
+                            for (Person person : totalConturiPersoane.keySet()) {
+                                if (person.getCNP().equals(user)) {
+                                    for(ContBancar cont1:totalConturiPersoane.get(person)){
+                                        if(cont1.getNumarCont().equals(iban1)){
+                                            for(ContBancar cont2 : listaConturi){
+                                                if(cont2.getNumarCont().equals(iban2)){
+                                                    cont1.transfer(cont2,suma);
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                            }
 
                             break;
+
                         case 4:
+                            System.out.println("Introdu IBAN-ul contului in care depui banii:");
+                            String iban=sc.nextLine();
+                            System.out.println("Introdu suma dorita pentru depunere:");
+                            suma =Integer.valueOf(sc.nextLine());
 
+                            for (Person person : totalConturiPersoane.keySet()) {
+                                if (person.getCNP().equals(user)) {
+                                    for(ContBancar cont1:totalConturiPersoane.get(person)){
+                                        if(cont1.getNumarCont().equals(iban)){
+                                            cont1.depunere(suma);
+                                        }
+                                    }
+                                }
+                            }
                             break;
+
                         case 5:
+                            System.out.println("Introdu IBAN-ul contului din care retragi banii:");
+                            iban=sc.nextLine();
+                            System.out.println("Introdu suma dorita pentru retragere:");
+                            suma =Integer.valueOf(sc.nextLine());
 
+                            for (Person person : totalConturiPersoane.keySet()) {
+                                if (person.getCNP().equals(user)) {
+                                    for(ContBancar cont1:totalConturiPersoane.get(person)){
+                                        if(cont1.getNumarCont().equals(iban)){
+                                            cont1.retragere(suma);
+                                        }
+
+                                    }
+
+                                }
+                            }
                             break;
+
                         case 6:
                             // Close program
                             validator = false;

@@ -1,6 +1,4 @@
-package ro.scoalainformala;
-
-import java.util.ArrayList;
+package ro.linkAcademy;
 
 public class Person {
     private String nume;

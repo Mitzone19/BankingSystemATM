@@ -1,4 +1,4 @@
-package ro.scoalainformala;
+package ro.linkAcademy;
 
 public class ContBancar {
     private String numarCont;
