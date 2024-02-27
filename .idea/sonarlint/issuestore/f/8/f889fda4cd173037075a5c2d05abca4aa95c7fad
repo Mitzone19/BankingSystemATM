@@ -1,5 +1,7 @@
 
-f	java:S117	"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÈêı
+f	java:S117	"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éŠ´Æ
 f	java:S117$"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºÜó
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(”ªŸ‰şÿÿÿÿ
 h	java:S116"NRename this field "CNP" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼‰Ûûÿÿÿÿ
+J
+java:S1172	"-Remove this unused method parameter "parola".(éŠ´Æ8¶½¡ÏŞ1

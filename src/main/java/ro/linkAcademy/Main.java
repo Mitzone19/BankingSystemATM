@@ -6,13 +6,25 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
+        DbManager con=new DbManager("jdbc:mysql://localhost:3306/bankingsystematm","root","");
 
         ArrayList<Person> listaPersoane = new ArrayList<>();
         ArrayList<ContBancar> listaConturi = new ArrayList<>();
         HashMap<Person,ArrayList<ContBancar>> totalConturiPersoane = new HashMap<>();
 
+
+        //UPDATE LISTAPERSOANE CU DATELE DIN DB
+        ResultSet rsp = con.executeQuery("Select * from person");
+        while(rsp.next()){
+            String numedb=rsp.getString("nume");
+            String prenumedb=rsp.getString("prenume");
+            String cnpdb=rsp.getString("cnp");
+            String paroladb=rsp.getString("parola");
+
+            listaPersoane.add(new Person(numedb,prenumedb,cnpdb,paroladb));
+        }
 
         //LOGIN SEQUENCE
         boolean validator = false;
@@ -77,8 +89,9 @@ public class Main {
                             System.out.println("Introdu parola contului:");
                             String parola1 = sc.nextLine();
 
-                            listaPersoane.add(new Person(nume,prenume,cnp));
+                            listaPersoane.add(new Person(nume,prenume,cnp,parola1));
                             listaUseri.put(cnp,parola1);    //ADAUGA CNP SI PAROLA IN SECVENTA DE LOGIN
+                            con.insertPersonDB(nume,prenume,cnp,parola1); //ADAUGA USER IN DB
                             System.out.println("Ai inregistrat urmatoarea persoana: "+nume+" "+prenume+" (CNP: "+cnp+")");
                             break;
 
@@ -145,9 +158,9 @@ public class Main {
                                                 }
                                             }else{
                                                 //DACA PERSOANA ARE DEJA O LISTA ASOCIATA, SE ADAUGA DOAR CONTUL VIZAT
-                                                for (Person w : totalConturiPersoane.keySet()) {
-                                                    if (!totalConturiPersoane.get(w).contains(cont)) {
-                                                        totalConturiPersoane.get(w).add(cont);
+                                                for (Person person2 : totalConturiPersoane.keySet()) {
+                                                    if (!totalConturiPersoane.get(person2).contains(cont)) {
+                                                        totalConturiPersoane.get(person2).add(cont);
                                                     }
                                                 }
                                             }

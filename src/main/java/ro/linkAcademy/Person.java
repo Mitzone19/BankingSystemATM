@@ -6,7 +6,7 @@ public class Person {
     private String CNP;
 
 
-    public Person(String nume, String prenume, String CNP) {
+    public Person(String nume, String prenume, String CNP,String parola) {
         this.nume = nume;
         this.prenume = prenume;
         this.CNP = CNP;
