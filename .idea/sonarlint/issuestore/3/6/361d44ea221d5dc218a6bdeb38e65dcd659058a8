@@ -1,87 +1,96 @@
 
-c
-java:S1192""FDefine a constant instead of duplicating this literal "admin" 3 times.(ñº¶¦8È£ÏŞ1
-z	java:S135%"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8È£ÏŞ1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(”ªŸ‰şÿÿÿÿ8ƒÈ£ÏŞ1
+h
+java:S1192"FDefine a constant instead of duplicating this literal "admin" 3 times.(€®´¢şÿÿÿÿ8¾õÅßŞ1
+z	java:S135V"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8¾õÅßŞ1
+M
+java:S1066Ø"/Merge this if statement with the enclosing one.(†â¬×8†ÉßŞ1
+R
+java:S1066å"/Merge this if statement with the enclosing one.(¿×¶ßøÿÿÿÿ8¥ËßŞ1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(”ªŸ‰şÿÿÿÿ8ÀõÅßŞ1
 p
-java:S3776	"SRefactor this method to reduce its Cognitive Complexity from 310 to the 15 allowed.(Á¯¦ş8ŠÈ£ÏŞ1
-G	java:S106&"+Replace this use of System.out by a logger.(óÙéÆ8È£ÏŞ1
-L	java:S1066"+Replace this use of System.out by a logger.(ŠªÚ©ùÿÿÿÿ8”È£ÏŞ1
-G	java:S1069"+Replace this use of System.out by a logger.(­ñëÌ8”È£ÏŞ1
-G	java:S106@"+Replace this use of System.out by a logger.(ïÉª…8”È£ÏŞ1
-V
-java:S2130O"9Use "Integer.parseInt" for this string-to-int conversion.(°·“İ8•È£ÏŞ1
->	java:S131Q""Add a default case to this switch.(ùó ı8•È£ÏŞ1
-F	java:S106S"+Replace this use of System.out by a logger.(™¡°8•È£ÏŞ1
-L	java:S106U"+Replace this use of System.out by a logger.( •—şÿÿÿÿ8•È£ÏŞ1
-G	java:S106W"+Replace this use of System.out by a logger.(ş´˜Ø8–È£ÏŞ1
-G	java:S106Y"+Replace this use of System.out by a logger.(é‡Ÿ8–È£ÏŞ1
-G	java:S106_"+Replace this use of System.out by a logger.(§‰š8–È£ÏŞ1
-L	java:S106g"+Replace this use of System.out by a logger.(—şŒæÿÿÿÿÿ8–È£ÏŞ1
-G	java:S106k"+Replace this use of System.out by a logger.(½¾ª÷8–È£ÏŞ1
-G	java:S106q"+Replace this use of System.out by a logger.(ûÒı8˜È£ÏŞ1
-V
-java:S2130r"9Use "Integer.parseInt" for this string-to-int conversion.(—äŸ­8˜È£ÏŞ1
-L	java:S106s"+Replace this use of System.out by a logger.(¦’¥ûÿÿÿÿ8˜È£ÏŞ1
-€
-java:S1157v"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(¾€‘„8™È£ÏŞ1
-€
-java:S1157w"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(ÔüÊ°8™È£ÏŞ1
-…
-java:S1157x"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(—Œ·ñüÿÿÿÿ8™È£ÏŞ1
-G	java:S106{"+Replace this use of System.out by a logger.(¶•››8™È£ÏŞ1
-H	java:S106„"+Replace this use of System.out by a logger.(À¤ê–8™È£ÏŞ1
-M	java:S106‡"+Replace this use of System.out by a logger.(¼¬‡’üÿÿÿÿ8™È£ÏŞ1
-K
-java:S1481Œ"-Remove this unused "counter3" local variable.(è×¿á8šÈ£ÏŞ1
-H	java:S106"+Replace this use of System.out by a logger.(Îî£•8šÈ£ÏŞ1
-H	java:S106"+Replace this use of System.out by a logger.(¾Ñµ8šÈ£ÏŞ1
+java:S3776	"SRefactor this method to reduce its Cognitive Complexity from 392 to the 15 allowed.(Á¯¦ş8ÒöÅßŞ1
+P
+java:S2864<"4Iterate over the "entrySet" instead of the "keySet".(À’Î$8ÛöÅßŞ1
 Q
-java:S2864š"4Iterate over the "entrySet" instead of the "keySet".(À’Î$8¿ü°ÏŞ1
-R
-java:S2864¡"4Iterate over the "entrySet" instead of the "keySet".(óÖ ş8Àü°ÏŞ1
-R
-java:S2864®"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8Àü°ÏŞ1
-H	java:S106¯"+Replace this use of System.out by a logger.(¼‡äƒ8›È£ÏŞ1
-M	java:S106´"+Replace this use of System.out by a logger.(ù’˜øÿÿÿÿ8œÈ£ÏŞ1
-H	java:S106¶"+Replace this use of System.out by a logger.(¹Ì—ç8œÈ£ÏŞ1
-M	java:S106¸"+Replace this use of System.out by a logger.(»À¤½ÿÿÿÿÿ8œÈ£ÏŞ1
+java:S2864D"4Iterate over the "entrySet" instead of the "keySet".(óÖ ş8ÜöÅßŞ1
+G	java:S106W"+Replace this use of System.out by a logger.(óÙéÆ8ÜöÅßŞ1
+L	java:S106g"+Replace this use of System.out by a logger.(ŠªÚ©ùÿÿÿÿ8áöÅßŞ1
+G	java:S106j"+Replace this use of System.out by a logger.(­ñëÌ8âöÅßŞ1
+G	java:S106q"+Replace this use of System.out by a logger.(ïÉª…8âöÅßŞ1
 W
-java:S2130¹"9Use "Integer.parseInt" for this string-to-int conversion.(À²ı³8œÈ£ÏŞ1
-M	java:S106Ç"+Replace this use of System.out by a logger.(¹¸­úÿÿÿÿ8œÈ£ÏŞ1
-M	java:S106É"+Replace this use of System.out by a logger.(Ô§ØÄùÿÿÿÿ8È£ÏŞ1
+java:S2130€"9Use "Integer.parseInt" for this string-to-int conversion.(°·“İ8âöÅßŞ1
+?	java:S131‚""Add a default case to this switch.(ùó ı8ãöÅßŞ1
+G	java:S106„"+Replace this use of System.out by a logger.(™¡°8ãöÅßŞ1
+M	java:S106†"+Replace this use of System.out by a logger.( •—şÿÿÿÿ8ãöÅßŞ1
+H	java:S106ˆ"+Replace this use of System.out by a logger.(ş´˜Ø8äöÅßŞ1
+H	java:S106Š"+Replace this use of System.out by a logger.(é‡Ÿ8äöÅßŞ1
+H	java:S106"+Replace this use of System.out by a logger.(§‰š8äöÅßŞ1
+M	java:S106•"+Replace this use of System.out by a logger.(¨¶ÑÍşÿÿÿÿ8åöÅßŞ1
+M	java:S106"+Replace this use of System.out by a logger.(—şŒæÿÿÿÿÿ8åöÅßŞ1
+H	java:S106¢"+Replace this use of System.out by a logger.(½¾ª÷8åöÅßŞ1
+H	java:S106¨"+Replace this use of System.out by a logger.(ûÒı8çöÅßŞ1
 W
-java:S2130Ê"9Use "Integer.parseInt" for this string-to-int conversion.(¬çéÀ8È£ÏŞ1
-M	java:S106Ô"+Replace this use of System.out by a logger.(Îáññüÿÿÿÿ8È£ÏŞ1
-H	java:S106Ö"+Replace this use of System.out by a logger.(àí’¤8È£ÏŞ1
+java:S2130©"9Use "Integer.parseInt" for this string-to-int conversion.(—äŸ­8çöÅßŞ1
+M	java:S106ª"+Replace this use of System.out by a logger.(¦’¥ûÿÿÿÿ8çöÅßŞ1
+
+java:S1157­"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(¾€‘„8çöÅßŞ1
+
+java:S1157®"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(ÔüÊ°8èöÅßŞ1
+†
+java:S1157¯"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(—Œ·ñüÿÿÿÿ8èöÅßŞ1
+H	java:S106´"+Replace this use of System.out by a logger.(¶•››8èöÅßŞ1
+H	java:S106½"+Replace this use of System.out by a logger.(À¤ê–8éöÅßŞ1
+M	java:S106À"+Replace this use of System.out by a logger.(¼¬‡’üÿÿÿÿ8éöÅßŞ1
+H	java:S106Æ"+Replace this use of System.out by a logger.(Îî£•8éöÅßŞ1
+H	java:S106È"+Replace this use of System.out by a logger.(¾Ñµ8éöÅßŞ1
+Q
+java:S2864Õ"4Iterate over the "entrySet" instead of the "keySet".(À’Î$8êöÅßŞ1
+M	java:S106Û"+Replace this use of System.out by a logger.(¢İûóüÿÿÿÿ8ìöÅßŞ1
+R
+java:S2864ã"4Iterate over the "entrySet" instead of the "keySet".(óÖ ş8ëöÅßŞ1
+H	java:S106é"+Replace this use of System.out by a logger.(Ø«ûò8ÔàËßŞ1
+R
+java:S2864ö"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8ÔàËßŞ1
+H	java:S106÷"+Replace this use of System.out by a logger.(¼‡äƒ8ÔàËßŞ1
+M	java:S106ü"+Replace this use of System.out by a logger.(ù’˜øÿÿÿÿ8ÕàËßŞ1
+H	java:S106ş"+Replace this use of System.out by a logger.(¹Ì—ç8ÕàËßŞ1
+M	java:S106€"+Replace this use of System.out by a logger.(»À¤½ÿÿÿÿÿ8ÖàËßŞ1
+a
+java:S2130">Use "Double.parseDouble" for this string-to-double conversion.(ÿ±Öİşÿÿÿÿ8ÖàËßŞ1
+M	java:S106"+Replace this use of System.out by a logger.(¹¸­úÿÿÿÿ8×àËßŞ1
+M	java:S106’"+Replace this use of System.out by a logger.(Ô§ØÄùÿÿÿÿ8×àËßŞ1
 \
-java:S2130×"9Use "Integer.parseInt" for this string-to-int conversion.(ÚÍ’öûÿÿÿÿ8È£ÏŞ1
-H	java:S106ç"+Replace this use of System.out by a logger.(Ùëƒî8È£ÏŞ1
+java:S2130“">Use "Double.parseDouble" for this string-to-double conversion.(Æˆ†æ8×àËßŞ1
+M	java:S106Ÿ"+Replace this use of System.out by a logger.(Îáññüÿÿÿÿ8ØàËßŞ1
+H	java:S106¡"+Replace this use of System.out by a logger.(àí’¤8ØàËßŞ1
+a
+java:S2130¢">Use "Double.parseDouble" for this string-to-double conversion.(‹”Ô«şÿÿÿÿ8ØàËßŞ1
+H	java:S106´"+Replace this use of System.out by a logger.(Ùëƒî8ÙàËßŞ1
 W
-java:S2130ò"9Use "Integer.parseInt" for this string-to-int conversion.(°·“İ8È£ÏŞ1
-?	java:S131ô""Add a default case to this switch.(ùó ı8È£ÏŞ1
-M	java:S106ö"+Replace this use of System.out by a logger.(¼¿¥°ùÿÿÿÿ8È£ÏŞ1
-M	java:S106ú"+Replace this use of System.out by a logger.(ÚÍ‰ÿÿÿÿÿ8È£ÏŞ1
+java:S2130¿"9Use "Integer.parseInt" for this string-to-int conversion.(°·“İ8ÚàËßŞ1
+?	java:S131Á""Add a default case to this switch.(ùó ı8ÚàËßŞ1
+M	java:S106Ã"+Replace this use of System.out by a logger.(¼¿¥°ùÿÿÿÿ8ÚàËßŞ1
+M	java:S106Ç"+Replace this use of System.out by a logger.(ÚÍ‰ÿÿÿÿÿ8ÛàËßŞ1
 ?
-java:S1116û"Remove this empty statement.(Åñ­õşÿÿÿÿ8ŸÈ£ÏŞ1
-M	java:S106"+Replace this use of System.out by a logger.(óğîÍøÿÿÿÿ8ŸÈ£ÏŞ1
+java:S1116È"Remove this empty statement.(Åñ­õşÿÿÿÿ8ÛàËßŞ1
+M	java:S106Î"+Replace this use of System.out by a logger.(óğîÍøÿÿÿÿ8ÛàËßŞ1
 R
-java:S2864ƒ"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8Åü°ÏŞ1
-M	java:S106…"+Replace this use of System.out by a logger.(Ğ¬õÔüÿÿÿÿ8ŸÈ£ÏŞ1
-M	java:S106‹"+Replace this use of System.out by a logger.(½ˆˆ‚şÿÿÿÿ8ŸÈ£ÏŞ1
-H	java:S106"+Replace this use of System.out by a logger.(¦¾›À8ŸÈ£ÏŞ1
-M	java:S106"+Replace this use of System.out by a logger.(»À¤½ÿÿÿÿÿ8ŸÈ£ÏŞ1
+java:S2864Ğ"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8ÛàËßŞ1
+M	java:S106Ò"+Replace this use of System.out by a logger.(Ğ¬õÔüÿÿÿÿ8ÜàËßŞ1
+M	java:S106Ø"+Replace this use of System.out by a logger.(½ˆˆ‚şÿÿÿÿ8ÜàËßŞ1
+H	java:S106Ú"+Replace this use of System.out by a logger.(¦¾›À8ÜàËßŞ1
+M	java:S106Ü"+Replace this use of System.out by a logger.(»À¤½ÿÿÿÿÿ8İàËßŞ1
 \
-java:S2130"9Use "Integer.parseInt" for this string-to-int conversion.(àõŒÜùÿÿÿÿ8 È£ÏŞ1
+java:S2130İ">Use "Double.parseDouble" for this string-to-double conversion.(ºË¨ˆ8İàËßŞ1
 R
-java:S2864’"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8Æü°ÏŞ1
-M	java:S106¥"+Replace this use of System.out by a logger.(ˆÉ—Âøÿÿÿÿ8 È£ÏŞ1
-M	java:S106§"+Replace this use of System.out by a logger.(ñ«ÎÅşÿÿÿÿ8 È£ÏŞ1
+java:S2864ß"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8İàËßŞ1
+M	java:S106ô"+Replace this use of System.out by a logger.(ˆÉ—Âøÿÿÿÿ8ŞàËßŞ1
+M	java:S106ö"+Replace this use of System.out by a logger.(ñ«ÎÅşÿÿÿÿ8ŞàËßŞ1
 R
-java:S2864ª"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8Çü°ÏŞ1
-M	java:S106¶"+Replace this use of System.out by a logger.(éˆÒ’ÿÿÿÿÿ8¡È£ÏŞ1
-H	java:S106¸"+Replace this use of System.out by a logger.(àí’¤8¡È£ÏŞ1
+java:S2864ù"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8ŞàËßŞ1
+M	java:S106‡"+Replace this use of System.out by a logger.(éˆÒ’ÿÿÿÿÿ8ßàËßŞ1
+H	java:S106‰"+Replace this use of System.out by a logger.(àí’¤8ààËßŞ1
 R
-java:S2864»"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8Èü°ÏŞ1
+java:S2864Œ"4Iterate over the "entrySet" instead of the "keySet".(™¹¹¤8ààËßŞ1
 å
-java:S6541	"ÇA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 268 to 64, Complexity from 69 to 14, Nesting Level from 11 to 2, Number of Variables from 61 to 6.(Á¯¦ş8¢È£ÏŞ1
+java:S6541	"ÇA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 325 to 64, Complexity from 82 to 14, Nesting Level from 12 to 2, Number of Variables from 73 to 6.(Á¯¦ş8÷öÅßŞ1

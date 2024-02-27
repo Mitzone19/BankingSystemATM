@@ -121,14 +121,14 @@ public class Main {
                             "7.Transfera bani\n" +
                             "8.Depune bani\n" +
                             "9.Retrage bani\n" +
-                            "10.Inchide program\n");
+                            "10.Iesi din cont\n");
 
 
                     Scanner sc = new Scanner(System.in);
                     int optiune = Integer.valueOf(sc.nextLine());
 
                     switch (optiune) {
-                        case 1:
+                        case 1: //1.Inregistreaza o persoana noua
                             System.out.println("Introdu nume:");
                             String nume = sc.nextLine();
                             System.out.println("Introdu prenume:");
@@ -150,7 +150,7 @@ public class Main {
                             }
                             break;
 
-                        case 2:
+                        case 2: //2.Vezi toate persoanele
                             int counter=1;
 
                             if(!listaPersoane.isEmpty()){
@@ -163,7 +163,7 @@ public class Main {
                             }
                             break;
 
-                        case 3:
+                        case 3: //3.Creaza cont nou
                             Random x=new Random();
                             System.out.println("Introdu balanta:");
                             int balanta = Integer.valueOf(sc.nextLine());
@@ -181,7 +181,7 @@ public class Main {
                             }
                             break;
 
-                        case 4:
+                        case 4: //4.Vezi toate conturile
                             int counter2=1;
 
                             if(!listaConturi.isEmpty()){
@@ -193,8 +193,8 @@ public class Main {
                             }
                             break;
 
-                        case 5:
-                            int counter3=0;
+                        case 5: //5.Creeaza/Asigneaza o lista de conturi pentru o persoana
+
                             System.out.println("Introdu IBAN-ul contului vizat:");
                             String iban=sc.nextLine();
                             System.out.println("Introdu cnp-ul persoanei vizate:");
@@ -208,19 +208,31 @@ public class Main {
 
                                             if(totalConturiPersoane.get(person) == null) {   //DACA PERSOANA NU ARE O LISTA DE CONTURI ASOCIATA, SE CREEAZA UNA
                                                 totalConturiPersoane.put(person, new ArrayList<>()); // SE ASOCIAZA PERSOANEI SI I SE ASOCIAZA SI CONTUL VIZAT
+
+
                                                 for (Person person1 : totalConturiPersoane.keySet()) {
                                                     if (!totalConturiPersoane.get(person1).contains(cont)) {
-                                                        totalConturiPersoane.get(person1).add(cont);
-                                                        con.insertContPersonDB(person1.getCNP(),cont.getNumarCont()); //UPDATE DB
+
+                                                        if(person1.getCNP().equals(cnpPersoana)){
+                                                            totalConturiPersoane.get(person1).add(cont);
+                                                            con.insertContPersonDB(person1.getCNP(),cont.getNumarCont()); //UPDATE DB
+                                                            System.out.println("Persoanei cu cnp "+person1.getCNP()+" i-a fost asociata lista "+
+                                                                    totalConturiPersoane.get(person1));
+                                                        }
+
                                                     }
                                                 }
                                             }else{
                                                 //DACA PERSOANA ARE DEJA O LISTA ASOCIATA, SE ADAUGA DOAR CONTUL VIZAT
                                                 for (Person person2 : totalConturiPersoane.keySet()) {
                                                     if (!totalConturiPersoane.get(person2).contains(cont)) {
-                                                        totalConturiPersoane.get(person2).add(cont);
-                                                        con.insertContPersonDB(person2.getCNP(),cont.getNumarCont()); //UPDATE DB
+                                                        if(person2.getCNP().equals(cnpPersoana)){
 
+                                                            totalConturiPersoane.get(person2).add(cont);
+                                                            con.insertContPersonDB(person2.getCNP(),cont.getNumarCont()); //UPDATE DB
+                                                            System.out.println("Persoanei cu cnp "+person2.getCNP()+" i-a fost asociata lista "+
+                                                                    totalConturiPersoane.get(person2));
+                                                        }
                                                     }
                                                 }
                                             }
@@ -230,13 +242,13 @@ public class Main {
                             }
                             break;
 
-                        case 6:
+                        case 6: //6.Vezi toti utilizatorii de conturi
                             for(Person person: totalConturiPersoane.keySet()){
                                 System.out.println(person.getNume()+" "+person.getPrenume()+" "+person.getCNP()+" are "+totalConturiPersoane.get(person));
                             }
                             break;
 
-                        case 7:
+                        case 7: //7.Transfera bani
                             System.out.println("Introdu iban-ul contului principal:");
                             String contPrincipal=sc.nextLine();
                             System.out.println("Introdu iban-ul contului destinatar:");
@@ -256,7 +268,7 @@ public class Main {
                             }
                             break;
 
-                        case 8:
+                        case 8: //8.Depune bani
                             System.out.println("Introdu IBAN-ul contului in care depui bani:");
                             String contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru alimentare:");
@@ -265,13 +277,13 @@ public class Main {
                             for(ContBancar cont:listaConturi){
                                 if(cont.getNumarCont().equals(contVizat)){
                                     cont.depunere(sumaAlimentare);
-                                    con.insertTranzactieDB(cont.getNumarCont(),sumaAlimentare,"NULL","DEPUNERE"); //UPDATE IN DB
+                                    con.insertTranzactieFaraDestinatarDB(cont.getNumarCont(),sumaAlimentare,"DEPUNERE"); //UPDATE IN DB
 
                                 }
                             }
                             break;
 
-                        case 9:
+                        case 9: //9.Retrage bani
                             System.out.println("Introdu IBAN-ul contului din care retragi bani:");
                             contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru retragere:");
@@ -280,12 +292,13 @@ public class Main {
                             for(ContBancar cont:listaConturi){
                                 if(cont.getNumarCont().equals(contVizat)){
                                     cont.retragere(sumaretragere);
-                                    con.insertTranzactieDB(cont.getNumarCont(),sumaretragere,"NULL","RETRAGERE"); //UPDATE IN DB
+                                    con.insertTranzactieFaraDestinatarDB(cont.getNumarCont(),sumaretragere,"RETRAGERE"); //UPDATE IN DB
                                 }
                             }
                             break;
 
-                        case 10: validator=false;
+                        case 10: //10.Iesire din cont
+                            validator=false;
                             break;
                     }
                 }
@@ -366,7 +379,7 @@ public class Main {
                                     for(ContBancar cont1:totalConturiPersoane.get(person)){
                                         if(cont1.getNumarCont().equals(iban)){
                                             cont1.depunere(suma);
-                                            con.insertTranzactieDB(cont1.getNumarCont(),suma,"NULL","DEPUNERE"); //UPDATE IN DB
+                                            con.insertTranzactieFaraDestinatarDB(cont1.getNumarCont(),suma,"DEPUNERE"); //UPDATE IN DB
 
                                         }
                                     }
@@ -385,7 +398,7 @@ public class Main {
                                     for(ContBancar cont1:totalConturiPersoane.get(person)){
                                         if(cont1.getNumarCont().equals(iban)){
                                             cont1.retragere(suma);
-                                            con.insertTranzactieDB(cont1.getNumarCont(),suma,"NULL","RETRAGERE"); //UPDATE IN DB
+                                            con.insertTranzactieFaraDestinatarDB(cont1.getNumarCont(),suma,"RETRAGERE"); //UPDATE IN DB
 
                                         }
 

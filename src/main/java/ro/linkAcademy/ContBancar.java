@@ -53,7 +53,8 @@ public class ContBancar {
     public void transfer(ContBancar destinatar, double suma){
         if(this.balanta>=(suma + suma * 0.1)) {
             this.balanta -= suma;
-            destinatar.setBalanta(suma);
+            double x = destinatar.getBalanta();
+            destinatar.setBalanta(x+suma);
             this.balanta -= suma * 0.1;
             System.out.println("Ai transferat "+suma+" lei in contul "+destinatar.getNumarCont());
         }
@@ -61,6 +62,6 @@ public class ContBancar {
 
     @Override
     public String toString() {
-        return "ContBancar{ IBAN= " + numarCont + ", balanta= " + balanta +", tipDeCont= " + tipDeCont;
+        return "ContBancar: IBAN= " + numarCont + ", balanta= " + balanta +", tipDeCont= " + tipDeCont;
     }
 }

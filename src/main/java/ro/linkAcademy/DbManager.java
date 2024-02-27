@@ -36,5 +36,8 @@ public class DbManager {
     public void insertTranzactieDB(String contPrincipal, Double suma, String contDestinatar, String tipTranzactie) throws SQLException {
         executeUpdate("INSERT INTO Tranzactii (contPrincipal, suma, contDestinatar, tipTranzactie) VALUES ('" + contPrincipal + "', " + suma + ", '" + contDestinatar + "', '" + tipTranzactie + "')");
     }
+    public void insertTranzactieFaraDestinatarDB(String contPrincipal, Double suma, String tipTranzactie) throws SQLException {
+        executeUpdate("INSERT INTO Tranzactii (contPrincipal, suma, contDestinatar, tipTranzactie) VALUES ('" + contPrincipal + "', " + suma + ", null, '" + tipTranzactie + "')");
+    }
 
 }
