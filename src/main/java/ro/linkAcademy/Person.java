@@ -39,8 +39,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Nume='" + nume + '\'' +
-                ", prenume='" + prenume + '\'' +
-                ", CNP='" + CNP;
+        return "Nume: " + nume +", prenume: " + prenume + ", CNP: " + CNP;
     }
 }

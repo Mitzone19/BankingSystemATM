@@ -9,20 +9,32 @@ public class DbManager {
         conn = DriverManager.getConnection(url, username, password);
     }
 
+    // Method to execute SELECT queries
     public ResultSet executeQuery(String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
     }
 
-    // Add methods for insert, update, delete operations
-    public void insertContDB(String iban, double balanta, String tipDeCont) throws SQLException {
-        executeQuery("Insert into contBancar values(null,"+iban+","+balanta+","+tipDeCont+");");
+    // Method to execute INSERT, UPDATE, DELETE queries
+    public void executeUpdate(String query) throws SQLException {
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query);
     }
 
-    public void insertPersonDB(String nume, String prenume, String cnp,String parola) throws SQLException {
-        executeQuery("Insert into Person values(null,"+nume+","+prenume+","+cnp+","+parola+");");
+    // Add other methods for insert, update, delete operations
+    public void insertContDB(String iban, double balanta, String tipDeCont) throws SQLException {
+        executeUpdate("INSERT INTO contBancar (iban, balanta, tipDeCont) VALUES ('" + iban + "', " + balanta + ", '" + tipDeCont + "')");
     }
+
+    public void insertPersonDB(String nume, String prenume, String cnp, String parola) throws SQLException {
+        executeUpdate("INSERT INTO Person (nume, prenume, cnp, parola) VALUES ('" + nume + "', '" + prenume + "', '" + cnp + "', '" + parola + "')");
+    }
+
     public void insertContPersonDB(String cnp, String iban) throws SQLException {
-        executeQuery("Insert into PersonConturi values(null,"+cnp+","+iban+");");
+        executeUpdate("INSERT INTO PersonConturi (cnp, iban) VALUES ('" + cnp + "', '" + iban + "')");
     }
+    public void insertTranzactieDB(String contPrincipal, Double suma, String contDestinatar, String tipTranzactie) throws SQLException {
+        executeUpdate("INSERT INTO Tranzactii (contPrincipal, suma, contDestinatar, tipTranzactie) VALUES ('" + contPrincipal + "', " + suma + ", '" + contDestinatar + "', '" + tipTranzactie + "')");
+    }
+
 }

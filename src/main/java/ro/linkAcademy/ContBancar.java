@@ -55,15 +55,12 @@ public class ContBancar {
             this.balanta -= suma;
             destinatar.setBalanta(suma);
             this.balanta -= suma * 0.1;
+            System.out.println("Ai transferat "+suma+" lei in contul "+destinatar.getNumarCont());
         }
     }
 
     @Override
     public String toString() {
-        return "ContBancar{" +
-                "numarCont='" + numarCont + '\'' +
-                ", balanta=" + balanta +
-                ", tipDeCont='" + tipDeCont + '\'' +
-                '}';
+        return "ContBancar{ IBAN= " + numarCont + ", balanta= " + balanta +", tipDeCont= " + tipDeCont;
     }
 }

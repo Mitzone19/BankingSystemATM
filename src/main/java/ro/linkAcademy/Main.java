@@ -8,31 +8,80 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        DbManager con=new DbManager("jdbc:mysql://localhost:3306/bankingsystematm","root","");
+
 
         ArrayList<Person> listaPersoane = new ArrayList<>();
         ArrayList<ContBancar> listaConturi = new ArrayList<>();
         HashMap<Person,ArrayList<ContBancar>> totalConturiPersoane = new HashMap<>();
+        Map<String, String> listaUseri = new HashMap<>();
+
+        listaUseri.put("user", "parola"); // ACCOUNT USER PREDEFINIT
+        listaUseri.put("admin", "admin"); // ACCOUNT ADMIN PREDEFINIT
 
 
-        //UPDATE LISTAPERSOANE CU DATELE DIN DB
-        ResultSet rsp = con.executeQuery("Select * from person");
-        while(rsp.next()){
-            String numedb=rsp.getString("nume");
-            String prenumedb=rsp.getString("prenume");
-            String cnpdb=rsp.getString("cnp");
-            String paroladb=rsp.getString("parola");
+            DbManager con = new DbManager("jdbc:mysql://localhost:3306/bankingsystematm", "root", "");
 
-            listaPersoane.add(new Person(numedb,prenumedb,cnpdb,paroladb));
+            //UPDATE LISTAPERSOANE CU DATELE DIN DB
+            ResultSet rsp = con.executeQuery("Select * from person");
+            while(rsp.next()){
+                String numedb=rsp.getString("nume");
+                String prenumedb=rsp.getString("prenume");
+                String cnpdb=rsp.getString("cnp");
+                String paroladb=rsp.getString("parola");
+
+                listaPersoane.add(new Person(numedb,prenumedb,cnpdb,paroladb));
+                listaUseri.put(cnpdb,paroladb); //UPDATE LOGIN INFO
+            }
+
+            //UPDATE LISTACONTURI CU DATELE DIN DB
+            ResultSet rsp1 = con.executeQuery("Select * from contBancar");
+            while(rsp1.next()){
+                String ibandb=rsp1.getString("iban");
+                Double balantadb=rsp1.getDouble("balanta");
+                String tipDeContdb=rsp1.getString("tipDeCont");
+
+
+                listaConturi.add(new ContBancar(ibandb,balantadb,tipDeContdb));
+            }
+        //UPDATE LISTACONTURI CU DATELE DIN DB
+        ResultSet rsp2 = con.executeQuery("Select * from PersonConturi");
+        while(rsp2.next()){
+            String ibandb=rsp2.getString("iban");
+            String cnpdb=rsp2.getString("cnp");
+
+            for(ContBancar cont: listaConturi){
+                if(cont.getNumarCont().equals(ibandb)){
+                    for(Person person:listaPersoane){
+                        if(person.getCNP().equals(cnpdb)){
+                            //PANA AICI IDENTIFICA IBAN DIN LISTA CONTURI SI PERSOANA VIZATA DIN LISTA PERSOANE
+
+                            if(totalConturiPersoane.get(person) == null) {   //DACA PERSOANA NU ARE O LISTA DE CONTURI ASOCIATA, SE CREEAZA UNA
+                                totalConturiPersoane.put(person, new ArrayList<>()); // SE ASOCIAZA PERSOANEI SI I SE ASOCIAZA SI CONTUL VIZAT
+                                for (Person person1 : totalConturiPersoane.keySet()) {
+                                    if (!totalConturiPersoane.get(person1).contains(cont)) {
+                                        totalConturiPersoane.get(person1).add(cont);
+
+                                    }
+                                }
+                            }else{
+                                //DACA PERSOANA ARE DEJA O LISTA ASOCIATA, SE ADAUGA DOAR CONTUL VIZAT
+                                for (Person person2 : totalConturiPersoane.keySet()) {
+                                    if (!totalConturiPersoane.get(person2).contains(cont)) {
+                                        totalConturiPersoane.get(person2).add(cont);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
         }
+
 
         //LOGIN SEQUENCE
         boolean validator = false;
-        Map<String, String> listaUseri = new HashMap<>();
-
-        listaUseri.put("user", "parola");
-        listaUseri.put("admin", "admin");
-
 
         while(true){
             System.out.println("Introdu user si parola(ENTER 4 EXIT):");
@@ -91,8 +140,14 @@ public class Main {
 
                             listaPersoane.add(new Person(nume,prenume,cnp,parola1));
                             listaUseri.put(cnp,parola1);    //ADAUGA CNP SI PAROLA IN SECVENTA DE LOGIN
-                            con.insertPersonDB(nume,prenume,cnp,parola1); //ADAUGA USER IN DB
+
                             System.out.println("Ai inregistrat urmatoarea persoana: "+nume+" "+prenume+" (CNP: "+cnp+")");
+
+                            try{
+                                con.insertPersonDB(nume,prenume,cnp,parola1); //ADAUGA USER IN DB
+                            }catch (SQLException e){
+                                System.out.println(e);
+                            }
                             break;
 
                         case 2:
@@ -118,7 +173,9 @@ public class Main {
                             if(tipCont.toLowerCase().equals("debit") ||
                                     tipCont.toLowerCase().equals("credit") ||
                                     tipCont.toLowerCase().equals("cumparaturi")){
-                                listaConturi.add(new ContBancar("RO"+x.nextLong(),balanta,tipCont));
+                                String ro="RO"+x.nextLong();
+                                listaConturi.add(new ContBancar(ro,balanta,tipCont));
+                                con.insertContDB(ro,balanta,tipCont); //INSERT CONT DB
                             }else{
                                 System.out.println("Tipul de cont ales nu este valid!");
                             }
@@ -154,6 +211,7 @@ public class Main {
                                                 for (Person person1 : totalConturiPersoane.keySet()) {
                                                     if (!totalConturiPersoane.get(person1).contains(cont)) {
                                                         totalConturiPersoane.get(person1).add(cont);
+                                                        con.insertContPersonDB(person1.getCNP(),cont.getNumarCont()); //UPDATE DB
                                                     }
                                                 }
                                             }else{
@@ -161,6 +219,8 @@ public class Main {
                                                 for (Person person2 : totalConturiPersoane.keySet()) {
                                                     if (!totalConturiPersoane.get(person2).contains(cont)) {
                                                         totalConturiPersoane.get(person2).add(cont);
+                                                        con.insertContPersonDB(person2.getCNP(),cont.getNumarCont()); //UPDATE DB
+
                                                     }
                                                 }
                                             }
@@ -182,13 +242,14 @@ public class Main {
                             System.out.println("Introdu iban-ul contului destinatar:");
                             String contDestinatar=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru transfer:");
-                            int sumaTransfer=Integer.valueOf(sc.nextLine());
+                            double sumaTransfer=Double.valueOf(sc.nextLine());
 
                             for(ContBancar cont:listaConturi){
                                 if(cont.getNumarCont().equals(contPrincipal)){
                                     for(ContBancar cont1:listaConturi){
                                         if(cont1.getNumarCont().equals(contDestinatar)){
                                             cont.transfer(cont1,sumaTransfer);
+                                            con.insertTranzactieDB(cont.getNumarCont(),sumaTransfer,cont1.getNumarCont(),"TRANSFER"); //UPDATE IN DB
                                         }
                                     }
                                 }
@@ -199,11 +260,13 @@ public class Main {
                             System.out.println("Introdu IBAN-ul contului in care depui bani:");
                             String contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru alimentare:");
-                            int sumaAlimentare=Integer.valueOf(sc.nextLine());
+                            double sumaAlimentare=Double.valueOf(sc.nextLine());
 
                             for(ContBancar cont:listaConturi){
                                 if(cont.getNumarCont().equals(contVizat)){
                                     cont.depunere(sumaAlimentare);
+                                    con.insertTranzactieDB(cont.getNumarCont(),sumaAlimentare,"NULL","DEPUNERE"); //UPDATE IN DB
+
                                 }
                             }
                             break;
@@ -212,11 +275,12 @@ public class Main {
                             System.out.println("Introdu IBAN-ul contului din care retragi bani:");
                             contVizat=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru retragere:");
-                            int sumaretragere=Integer.valueOf(sc.nextLine());
+                            double sumaretragere=Double.valueOf(sc.nextLine());
 
                             for(ContBancar cont:listaConturi){
                                 if(cont.getNumarCont().equals(contVizat)){
                                     cont.retragere(sumaretragere);
+                                    con.insertTranzactieDB(cont.getNumarCont(),sumaretragere,"NULL","RETRAGERE"); //UPDATE IN DB
                                 }
                             }
                             break;
@@ -269,7 +333,7 @@ public class Main {
                             System.out.println("Introdu IBAN-ul vizat pentru transfer:");
                             String iban2=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru transfer:");
-                            int suma =Integer.valueOf(sc.nextLine());
+                            double suma =Double.valueOf(sc.nextLine());
 
                             for (Person person : totalConturiPersoane.keySet()) {
                                 if (person.getCNP().equals(user)) {
@@ -278,6 +342,8 @@ public class Main {
                                             for(ContBancar cont2 : listaConturi){
                                                 if(cont2.getNumarCont().equals(iban2)){
                                                     cont1.transfer(cont2,suma);
+                                                    con.insertTranzactieDB(cont1.getNumarCont(),suma,cont2.getNumarCont(),"TRANSFER"); //UPDATE IN DB
+
                                                 }
                                             }
                                         }
@@ -293,13 +359,15 @@ public class Main {
                             System.out.println("Introdu IBAN-ul contului in care depui banii:");
                             String iban=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru depunere:");
-                            suma =Integer.valueOf(sc.nextLine());
+                            suma =Double.valueOf(sc.nextLine());
 
                             for (Person person : totalConturiPersoane.keySet()) {
                                 if (person.getCNP().equals(user)) {
                                     for(ContBancar cont1:totalConturiPersoane.get(person)){
                                         if(cont1.getNumarCont().equals(iban)){
                                             cont1.depunere(suma);
+                                            con.insertTranzactieDB(cont1.getNumarCont(),suma,"NULL","DEPUNERE"); //UPDATE IN DB
+
                                         }
                                     }
                                 }
@@ -310,13 +378,15 @@ public class Main {
                             System.out.println("Introdu IBAN-ul contului din care retragi banii:");
                             iban=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru retragere:");
-                            suma =Integer.valueOf(sc.nextLine());
+                            suma =Double.valueOf(sc.nextLine());
 
                             for (Person person : totalConturiPersoane.keySet()) {
                                 if (person.getCNP().equals(user)) {
                                     for(ContBancar cont1:totalConturiPersoane.get(person)){
                                         if(cont1.getNumarCont().equals(iban)){
                                             cont1.retragere(suma);
+                                            con.insertTranzactieDB(cont1.getNumarCont(),suma,"NULL","RETRAGERE"); //UPDATE IN DB
+
                                         }
 
                                     }
