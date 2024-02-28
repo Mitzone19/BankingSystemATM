@@ -312,14 +312,14 @@ public class Main {
                             "3.Transfera bani\n" +
                             "4.Depune bani\n" +
                             "5.Retrage bani\n" +
-                            "6.Inchide program\n");
+                            "6.Iesi din cont\n");
 
 
                     Scanner sc = new Scanner(System.in);
                     int optiune = Integer.valueOf(sc.nextLine());
 
                     switch (optiune) {
-                        case 1:
+                        case 1: //1.Vezi datele personale
                             System.out.println("Datele tale personale:");
 
                             for (Person person : listaPersoane) {
@@ -330,7 +330,7 @@ public class Main {
                             }
                             break;
 
-                        case 2:
+                        case 2: //2.Vezi toate conturile
                             System.out.println("Lista conturilor tale:");
 
                             for (Person person : totalConturiPersoane.keySet()) {
@@ -340,7 +340,7 @@ public class Main {
                             }
                             break;
 
-                        case 3:
+                        case 3: //3.Transfera bani
                             System.out.println("Introdu IBAN-ul contului din care transferi banii:");
                             String iban1=sc.nextLine();
                             System.out.println("Introdu IBAN-ul vizat pentru transfer:");
@@ -368,7 +368,7 @@ public class Main {
 
                             break;
 
-                        case 4:
+                        case 4: //4.Depune bani
                             System.out.println("Introdu IBAN-ul contului in care depui banii:");
                             String iban=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru depunere:");
@@ -387,7 +387,7 @@ public class Main {
                             }
                             break;
 
-                        case 5:
+                        case 5: //5.Retrage bani
                             System.out.println("Introdu IBAN-ul contului din care retragi banii:");
                             iban=sc.nextLine();
                             System.out.println("Introdu suma dorita pentru retragere:");
@@ -408,7 +408,7 @@ public class Main {
                             }
                             break;
 
-                        case 6:
+                        case 6: //Exit
                             // Close program
                             validator = false;
                             break;
